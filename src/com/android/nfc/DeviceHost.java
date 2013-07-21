@@ -33,7 +33,12 @@ public interface DeviceHost {
         /**
          * Notifies transaction
          */
-        public void onCardEmulationAidSelected(byte[] aid);
+		public void onCardEmulationAidSelected(byte[] aid, byte[] data);
+
+		/**
+		* Notifies connectivity event from the SE (UICC)
+		*/
+		public void onConnectivityEvent();
 
         /**
          * Notifies P2P Device detected, to activate LLCP link
@@ -193,9 +198,9 @@ public interface DeviceHost {
 
     public int[] doGetSecureElementList();
 
-    public void doSelectSecureElement();
+    public void doSelectSecureElement(int seID);
 
-    public void doDeselectSecureElement();
+    public void doDeselectSecureElement(int seID);
 
     public LlcpConnectionlessSocket createLlcpConnectionlessSocket(int nSap, String sn)
             throws LlcpException;

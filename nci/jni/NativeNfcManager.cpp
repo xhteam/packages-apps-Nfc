@@ -1229,7 +1229,7 @@ static jintArray nfcManager_doGetSecureElementList(JNIEnv *e, jobject o)
 ** Returns:         None
 **
 *******************************************************************************/
-static void nfcManager_doSelectSecureElement(JNIEnv *e, jobject o)
+static void nfcManager_doSelectSecureElement(JNIEnv *e, jobject o, jint seID)
 {
     ALOGD ("%s: enter", __FUNCTION__);
     bool stat = true;
@@ -1272,7 +1272,7 @@ TheEnd:
 ** Returns:         None
 **
 *******************************************************************************/
-static void nfcManager_doDeselectSecureElement(JNIEnv *e, jobject o)
+static void nfcManager_doDeselectSecureElement(JNIEnv *e, jobject o, jint seID)
 {
     ALOGD ("%s: enter", __FUNCTION__);
     bool stat = false;
@@ -1580,10 +1580,10 @@ static JNINativeMethod gMethods[] =
     {"doGetSecureElementList", "()[I",
             (void *)nfcManager_doGetSecureElementList},
 
-    {"doSelectSecureElement", "()V",
+    {"doSelectSecureElement", "(I)V",
             (void *)nfcManager_doSelectSecureElement},
 
-    {"doDeselectSecureElement", "()V",
+    {"doDeselectSecureElement", "(I)V",
             (void *)nfcManager_doDeselectSecureElement},
 
     {"doCheckLlcp", "()Z",

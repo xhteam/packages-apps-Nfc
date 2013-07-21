@@ -177,10 +177,10 @@ public class NativeNfcManager implements DeviceHost {
     public native int[] doGetSecureElementList();
 
     @Override
-    public native void doSelectSecureElement();
+    public native void doSelectSecureElement(int seID);
 
     @Override
-    public native void doDeselectSecureElement();
+    public native void doDeselectSecureElement(int seID);
 
 
     private native NativeLlcpConnectionlessSocket doCreateLlcpConnectionlessSocket(int nSap,
@@ -378,11 +378,19 @@ public class NativeNfcManager implements DeviceHost {
     /**
      * Notifies transaction
      */
-    private void notifyTransactionListeners(byte[] aid) {
-        mListener.onCardEmulationAidSelected(aid);
+	private void notifyTransactionListeners(byte[] aid, byte[] data) {
+		 Log.d(TAG,"NativeNfcManager-notifyTransactionListeners");
+		 mListener.onCardEmulationAidSelected(aid,data);
     }
 
     /**
+	 * Notifies Connectivity event
+	 */
+	 private void notifyConnectivityListeners() {
+	   mListener.onConnectivityEvent();
+	}
+
+	/**
      * Notifies P2P Device detected, to activate LLCP link
      */
     private void notifyLlcpLinkActivation(NativeP2pDevice device) {
